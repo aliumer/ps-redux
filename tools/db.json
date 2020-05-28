@@ -1,13 +1,6 @@
 {
   "courses": [
     {
-      "id": 1,
-      "title": "Securing React Apps with Auth0",
-      "slug": "react-auth0-authentication-security",
-      "authorId": 1,
-      "category": "JavaScript"
-    },
-    {
       "id": 2,
       "title": "React: The Big Picture",
       "slug": "react-big-picture",
@@ -69,22 +62,6 @@
       "slug": "web-components-shadow-dom",
       "authorId": 1,
       "category": "HTML5"
-    },
-    {
-      "id": 11,
-      "title": "test",
-      "authorId": 2,
-      "category": "test new course",
-      "createdAt": 1590662890592,
-      "slug": "test"
-    },
-    {
-      "id": 12,
-      "title": "Testing angular app with Jasmine",
-      "authorId": 3,
-      "category": "Testing ",
-      "createdAt": 1590663781475,
-      "slug": "testing-angular-app-with-jasmine"
     }
   ],
   "authors": [

@@ -1,5 +1,6 @@
 import * as types from "./actionTypes";
 import * as courseApi from '../../api/courseApi';
+import { beginApiCall, apiCallError } from '../actions/apiStatusActions';
 
 export function LoadCoursesSuccess(courses) {
   return { type: types.LOAD_COURSES_SUCCESS, courses: courses};
@@ -16,17 +17,23 @@ export function createCourseSuccess(course) {
 // redux thunk
 export function loadCourses() {
   return function(dispatch) {
+    dispatch(beginApiCall());
     return courseApi.getCourses().then(courses => {
       dispatch(LoadCoursesSuccess(courses))
     }).catch(error => {
-      console.log('Error Occured:', error);
+      dispatch(apiCallError(error));
       throw error;
     })
   }
 }
 
+export function deleteCourseOptimistic(course) {
+  return { type: types.DELETE_COURSE_OPTIMISTIC, course };
+}
+
 export function saveCourse(course) {
-  return function(dispatch, getState) {
+  return function(dispatch) {
+    dispatch(beginApiCall());
     return courseApi.saveCourse(course)
     .then(savedCourse => {
       course.id 
@@ -34,7 +41,16 @@ export function saveCourse(course) {
       : dispatch(createCourseSuccess(savedCourse))
     })
     .catch(error => {
+      dispatch(apiCallError(error));
       throw error;
     })
+  }
+}
+
+export function deleteCourse(course) {
+  return function(dispatch) {
+    dispatch(deleteCourseOptimistic(course));
+    return courseApi.deleteCourse(course.id);
+
   }
 }
